@@ -43,9 +43,12 @@
     			
     			<div class="centered m2">
     				<input type="submit" class="button" name="login" value="LogIn">
+    			</div>    			
+    			<div class="centered m2">
+    				<a class="button" href="/User/create">Nuevo usuario</a>
     			</div>
-    			<div class="right">
-    				<a href="/Forgotpassword">Olvidé mi clave</a>
+    			<div class="centered m1">
+    				<a class="button" href="/Forgotpassword">Olvidé mi clave</a>
     			</div>
     			
     		</form>
