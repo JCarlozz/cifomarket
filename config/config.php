@@ -1,5 +1,6 @@
 <?php
 
+
 /** config.php
  * 
  * Parámetros de configuración del proyecto.
@@ -60,7 +61,7 @@ define('AUTOLOAD_DIRECTORIES',  [
  * APLICACIÓN
  * -------------------------------------------------------------*/
 
-define('APP_NAME', 'FastLight Framework');   // Título de la aplicación.
+define('APP_NAME', 'CifoMarket');   // Título de la aplicación.
 define('APP_TYPE', 'WEB');                   // Tipo de aplicación: WEB o API.
 
 define('APP_VERSION', '1.8.7');  // versión actual del framework o aplicación desarrollada
@@ -74,7 +75,7 @@ define('DEFAULT_METHOD', 'index');
 // Email del administrador, para la operación de "contacto".
 // Esta operación no está implementada de serie en FastLight,
 // la implementamos en clase.
-define('ADMIN_EMAIL', 'robert@fastlight.org');
+define('ADMIN_EMAIL', 'jz_blo@hotmail.com');
 
 // ¿Deben las cadenas vacías ser convertidas a NULL? 
 // se aplica al recuperar los datos de la petición mediante el objeto Request,
@@ -110,11 +111,11 @@ define('RESPONSE_CHARSET', 'utf-8'); // charset para las respuestas HTTP
 define('DB_HOST','localhost');  // Host.
 define('DB_USER','root');       // Usuario.
 define('DB_PASS','');           // Password.
-define('DB_NAME','fastlight');  // Nombre de la base de datos.
+define('DB_NAME','cifomarket');  // Nombre de la base de datos.
 define('DB_PORT',  3306);       // Puerto.
 define('DB_CHARSET','utf8');    // Codificación de caracteres.
 
-define('DB_CLASS','DBPDO');     // Clase a usar, puede ser DBMysqli (mysqli) o DBPDO (PDO).
+define('DB_CLASS','DBMysqli');     // Clase a usar, puede ser DBMysqli (mysqli) o DBPDO (PDO).
 define('SGDB','mysql');         // Driver que debe usar PDO (solamente para PDO).
 
 
@@ -133,26 +134,22 @@ define('USER_PROVIDER', 'User');
 define('USER_ROLES', [
     'Usuario'       => 'ROLE_USER',
     'Administrador' => 'ROLE_ADMIN',
-    'Supervisor'    => 'ROLE_SUPERVISOR',
-    'Editor'        => 'ROLE_EDITOR',
-    'Test'          => 'ROLE_TEST',
-    'API'           => 'ROLE_API',
-    'Estudiante'    => 'ROLE_STUDENT',
     'Bloqueado'     => 'ROLE_BLOCKED'
 ]);
 
 // mensaje que se mostrará al usuario bloqueado cuando intenta hacer Login
-define('BLOCKED_MESSAGE', "Has sido bloqueado por un administrador, si consideras 
-                           que es un error puedes contactar mediante el formulario de contacto.");
+define('BLOCKED_MESSAGE', "Has sido bloqueado por el administrador, puede contactar mediante el formulario de contacto.");
 
 // redirección tras el intento de Login del usuario bloqueado
 define('BLOCKED_REDIRECT', '/');
 
 // carpeta para las imágenes de los usuarios
 define('USER_IMAGE_FOLDER','/images/users');
+define('PRO_IMAGE_FOLDER','/images/pro');
 
 // imagen por defecto para los usuarios que no tengan
 define('DEFAULT_USER_IMAGE', 'default.png');
+define('DEFAULT_PRO_IMAGE', 'default.png');
 
 
 
@@ -174,7 +171,7 @@ define('DB_LOGIN_ERRORS', false);                  // Guardar errores de login e
  * -------------------------------------------------------------*/
 
 // nombre de la sesión (y de la cookie de sesión)
-define('SESSION_NAME', 'FASTLIGHTSESSID');   
+define('SESSION_NAME', 'CM2025');   
 
 // tiempo (en segundos) antes de marcar los datos de sesión como basura
 define('SESSION_TIME', 1440);           

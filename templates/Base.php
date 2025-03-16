@@ -168,32 +168,43 @@ class Base implements TemplateInterface{
      * 
      * @return string HTML del menú principal de la página.
      */
-    public function menu(){ 
+    public function menu(){
+        
+        $user = Login::user();
         
         // parte izquierda (operaciones para todos los usuarios)
+        
         $html = "<menu class='menu'>";
-        $html .=   "<li><a href='/'>Inicio</a></li>";
+        $html .=   "<li><a href='/User/show/{$user->id}'>Inicio</a></li>";
+        $html .=   "<li><a href='/Producto'>Productos</a></li>";
+        
+        $html .=   "<li><a href='/User'>Usuarios</a></li>";
+        
+        
+        $html .=   "<li><a href='/Panel/admin'>Panel del administrador</a></li>";
+            
+        $html .= "<li><a href='/Contacto'>Contacto</a></li>";
         
         // Enlace a los ejemplos de maquetación.
         // Lo eliminaremos en producción junto con la carpeta mvc/views/examples y el ExampleController
-        $html .=   "<li><a href='/Example'>Ejemplos de maquetación</a></li>";
+        //$html .=   "<li><a href='/Example'>Ejemplos de maquetación</a></li>";
            
         // Enlace a los tests de ejemplo (solamente para usuarios con alguno de los TEST_ROLES)
         // Lo eliminaremos en producción, junto a la carpeta test y el TestController
-        if(Login::oneRole(TEST_ROLES))
+        //if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Test'>Test</a></li>";
         
         // Enlace a las estadística de visitas (solamente para usuarios con alguno de los STAT_ROLES)
-        if(SAVE_STATS && Login::oneRole(STATS_ROLES))
+            //if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Stat'>Visitas</a></li>";
         
         // Enlace a la gestión de errores (solamente para usuarios con alguno de los ERROR_ROLES)
-        if((Login::oneRole(ERROR_ROLES)) && (DB_ERRORS || LOG_ERRORS || LOG_LOGIN_ERRORS))
+            //if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Error/list'>Errores</a></li>";
          
         // Enlace al repositorio de FastLight en GitHub  
         // Lo podéis eliminar, para que no aparezca en vuestras aplicaciones
-        $html .=   "<li><a href='https://github.com/robertsallent/fastlight'>GitHub</a></li>";
+        //$html .=   "<li><a href='https://github.com/robertsallent/fastlight'>GitHub</a></li>";
             
         $html .= "</menu>";
         $html .= "</nav>";
