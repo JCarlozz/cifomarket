@@ -50,6 +50,7 @@
     			<?php  if(Login::isAdmin()){?>
     			<p><b>Roles:</b> 		<?= implode(', ', $user->roles) ?></p>
     			<?php } ?>
+    			
     			</div>
     			<figure class="flex1 centrado p2">
         			<img src="<?=USER_IMAGE_FOLDER.'/'.($user->foto ?? DEFAULT_USER_IMAGE)?>"
@@ -82,7 +83,7 @@
         					</tr>        					
         				<?php foreach($productos as $producto){ ?>			     			     	
             				<tr>
-            					<td><?=$producto->titulo?></td>
+            					<td><a href='/Producto/show/<?= $producto->id ?>'><?=$producto->titulo?></td>
             					<td><?=$producto->precio?></td>
             					<td><?=$producto->estado?></td>
             					<?php  if(lOGIN::user()->id ==  $user->id ){?>
