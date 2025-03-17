@@ -29,7 +29,7 @@
 		
 		
     		<h1><?= APP_NAME ?></h1>
-    		<?php  if(Login::user()->id ==  $user->id ){?>
+    		<?php  if(Login::user()->id ==  $user->id || Login::isAdmin() ){?>
     		<a class="button" href="/User/edit/<?= $user->id?>">Editar</a>
     		<?php }?>
     		<section id="detalles" class="flex-container gap2">

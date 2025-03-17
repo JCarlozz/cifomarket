@@ -120,7 +120,7 @@
             
                 $user->addRole('ROLE_USER', $roles );
             
-            //$user->picture(request()->post('picture') ?? 'DEFAULT_USERS_IMAGE');
+            $user->foto(request()->post('foto') ?? 'DEFAULT_USERS_IMAGE');
             
             try{
                 $user->save();

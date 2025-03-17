@@ -3,14 +3,14 @@ class PanelController extends Controller{
     
     public function index(){
         
-        //Auth::role('ROLE_LIBRARIAN');
+        Auth::allRoles(["ROLE_ADMIN"]);
         
         return view('panel/list');
     }
     
     public function admin(){
         
-        //Auth::admin();
+        Auth::allRoles(["ROLE_ADMIN"]);
         
         return view('panel/paneladmin');
     }    

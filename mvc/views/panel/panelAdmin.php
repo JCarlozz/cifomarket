@@ -25,6 +25,7 @@
 		<?= $template->messages() ?>
 		
 		<main>
+			<?php if(Login::isAdmin()) {?>
     		<h1><?= APP_NAME ?></h1>
     		<h2>Panel del administrador</h2>
     		
@@ -39,7 +40,8 @@
 						<li><a href='/User/create'>Nuevo usuarios</a></li>
 					</ul>				
 				</section>			
-			</div>    		
+			</div>  
+			<?php }?>  		
 		</main>
 		<?= $template->footer() ?>
 		<?= $template->version() ?>		

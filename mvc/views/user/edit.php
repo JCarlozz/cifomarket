@@ -27,6 +27,11 @@
 		<?= $template->messages() ?>
 		
 		<main>
+			<?php  if(Login::user()->id ==  $user->id || Login::isAdmin() ){?>
+			<?php } else {
+                    echo "<script>alert('No tienes permisos para acceder a esta página.'); window.location.href='/';</script>";
+                    exit();}?>	
+						
     		<h1><?= APP_NAME ?></h1>
     		<h2>Editar el usuario <?= $user->nombreyapellidos?></h2>
     		<section class="flex-container gap2">
@@ -127,7 +132,8 @@
 			<div class="centrado my2">
 				<a class="button" onclick="history.back()">Atrás</a>
 				<a class="button" href="/User/list">Lista de usuarios</a>
-			</div>    		
+			</div>  
+			
 		</main>
 		<?= $template->footer() ?>
 		<?= $template->version() ?>	
