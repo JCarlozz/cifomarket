@@ -85,7 +85,7 @@
     						location.href='/Ejemplar/destroy/'+id
     				}
     			</script>
-    			<?php if(Login::oneRole(['ROLE_ADMIN'])){?>
+    			<?php if(Login::isAdmin()){?>
     			<section>
                     <h2>Roles de <?= htmlspecialchars($user->nombreyapellidos) ?></h2>
                 

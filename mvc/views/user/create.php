@@ -102,7 +102,7 @@
     					<label>Imagen de perfil</label>
     					<input type="file" name="picture" accept="image/*" id="file-with-preview">
     					<br>
-    					<?php if(Login::oneRole(['ROLE_ADMIN'])){?>
+    					<?php if(Login::isAdmin()){?>
     					<label>Rol</label>
     					
     					<select name="roles">

@@ -49,8 +49,8 @@ CREATE TABLE productos(
 -- usuarios para las pruebas, podéis crear tantos como necesitéis
 -- Insertar 50 usuarios
 INSERT INTO users (nombreyapellidos, email, phone, password, roles, foto, poblacion, provincia, direccion) VALUES
-('Juan Pérez', 'pepe@hotmail.com', '600123456', '', '["ROLE_USER, ROLE_ADMIN"]', 'foto1.jpg', 'Madrid', 'Madrid', 'Calle Mayor 1'),
-('Ana García', 'ana.garcia@example.com', '600123457', 'password123', '["ROLE_USER"]', 'foto2.jpg', 'Barcelona', 'Barcelona', 'Calle Gran Vía 2'),
+('Juan Pérez', 'admin@hotmail.com', '600123456', '81dc9bdb52d04dc20036dbd8313ed055', '["ROLE_ADMIN", "ROLE_USER"]', 'foto1.jpg', 'Madrid', 'Madrid', 'Calle Mayor 1'),
+('Ana García', 'user@hotmail.com', '600123457', '81dc9bdb52d04dc20036dbd8313ed055', '["ROLE_USER"]', 'foto2.jpg', 'Barcelona', 'Barcelona', 'Calle Gran Vía 2'),
 ('Luis Martínez', 'luis.martinez@example.com', '600123458', 'password123', '["ROLE_USER"]', 'foto3.jpg', 'Valencia', 'Valencia', 'Calle Colón 3'),
 ('María López', 'maria.lopez@example.com', '600123459', 'password123', '["ROLE_USER"]', 'foto4.jpg', 'Sevilla', 'Sevilla', 'Calle Sierpes 4'),
 ('Carlos Sánchez', 'carlos.sanchez@example.com', '600123460', 'password123', '["ROLE_USER"]', 'foto5.jpg', 'Zaragoza', 'Zaragoza', 'Calle Alfonso 5'),
@@ -101,7 +101,7 @@ INSERT INTO users (nombreyapellidos, email, phone, password, roles, foto, poblac
 ('Nuria Gallardo', 'nuria.gallardo@example.com', '600123505', 'password123', '["ROLE_USER"]', 'foto50.jpg', 'Santa Cruz de Tenerife', 'Santa Cruz de Tenerife', 'Calle Castillo 50');
 
 UPDATE users SET foto = NULL;
-UPDATE users SET password = 1234;
+-- UPDATE users SET password = 81dc9bdb52d04dc20036dbd8313ed055;
 
 -- Insertar productos en tabla productos
 -- Insertar 200 productos con idusuario asignado aleatoriamente entre 1 y 50

@@ -26,10 +26,12 @@
 		<?= $template->messages() ?>
 		
 		<main>
+		
+		
     		<h1><?= APP_NAME ?></h1>
-    		
+    		<?php  if(Login::user()->id ==  $user->id ){?>
     		<a class="button" href="/User/edit/<?= $user->id?>">Editar</a>
-    		
+    		<?php }?>
     		<section id="detalles" class="flex-container gap2">
     			<div class="flex2">
     			<h2><?=$user->nombreyapellidos?></h2>
@@ -37,12 +39,15 @@
     			
     			
     			<p><b>Nombre:</b>		<?=$user->nombreyapellidos?></p>
+    			<?php if(Login::check()) { ?>
     			<p><b>Email:</b>		<?=$user->email?></p>
     			<p><b>Teléfono:</b>		<?=$user->phone?></p>
     			<p><b>Ciudad:</b>		<?=$user->poblacion?></p>
     			<p><b>Provincia:</b>	<?=$user->provincia?>
     			<p><b>Dirección:</b>	<?=$user->direccion?></p>
-    			<?php if(Login::oneRole(['ROLE_ADMIN'])){?>
+    			<?php } ?>
+    			
+    			<?php  if(Login::isAdmin()){?>
     			<p><b>Roles:</b> 		<?= implode(', ', $user->roles) ?></p>
     			<?php } ?>
     			</div>
@@ -62,30 +67,32 @@
     		<section>
     									
     			 <h2>Productos de <?= $user->nombreyapellidos?></h2>
-    				   			
+    				<?php  if(Login::user()->id ==  $user->id ){?>  			
     				<a class="button" href="/Producto/create/<?=$producto->idusers?>">
     					Nuevo producto
     				</a>
-    				
+    				<?php } ?>
     				<?php 
     			 	if (!$productos){
     				    echo "<div class='warning p2'><p>No tienes productos a la venta.</p></div>";
     				}else{ ?>    				
         				<table class="table w100 centered-block">
         					<tr>    					
-        						<th>Título</th><th>Precio</th><th>Estado</th><th>Operaciones</th>
+        						<th>Título</th><th>Precio</th><th>Estado</th><?php  if(lOGIN::user()->id ==  $user->id ){?><th>Operaciones</th><?php }?>
         					</tr>        					
         				<?php foreach($productos as $producto){ ?>			     			     	
             				<tr>
             					<td><?=$producto->titulo?></td>
             					<td><?=$producto->precio?></td>
             					<td><?=$producto->estado?></td>
+            					<?php  if(lOGIN::user()->id ==  $user->id ){?>
             					<td class="centered">  
             							<a class="button" href="/Producto/edit/<?= $producto->id?>">Editar</a> 
             							                                 
-                                        <a class="button" href="/Producto/delete/<?= $producto->id ?>">Borrar</a>                        
+                                        <a class="button" href="/Producto/delete/<?= $producto->id ?>">Borrar</a>           
                                    
-                                </td>                                
+                                </td>
+                                <?php } ?>                                
             				</tr>            			
             			<?php } ?>
             			<?php } ?>
@@ -97,8 +104,10 @@
     		<div class="centrado">
     			<a class="button" onclick="history.back()">Atrás</a>
     			<a class="button" href="/Producto/list/">Lista de productos</a>
+    			<?php  if(Login::user()->id ==  $user->id ){?>
     			<a class="button" href="/User/edit/<?= $user->id?>">Editar</a>
-    			<a class="button" href="/User/delete/<?= $user->id?>">Darme de baja</a>    		
+    			<a class="button" href="/User/delete/<?= $user->id?>">Darme de baja</a>
+    			<?php } ?>    		
     		</div>
 		</main>
 		<?= $template->footer() ?>

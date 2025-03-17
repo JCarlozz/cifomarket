@@ -26,7 +26,7 @@
 		<?= $template->messages() ?>
 		
 		<main>
-		
+			<?php if(Login::role('ROLE_ADMIN')) { ?>
     		<?php if ($users) { ?>
     		
     		<div class="right">
@@ -101,6 +101,8 @@
     			<div class="centred">
     				<a class="button" onclick="history.back()">Atrás</a>
     			</div>
+    		
+    		<?php } ?>
     		
 		</main>
 		

@@ -175,12 +175,18 @@ class Base implements TemplateInterface{
         // parte izquierda (operaciones para todos los usuarios)
         
         $html = "<menu class='menu'>";
-        $html .=   "<li><a href='/User/show/{$user->id}'>Inicio</a></li>";
+        
+        $html .=   "<li><a href='/'>Inicio</a></li>";
+        
+        if(Login::check())
+        $html .=   "<li><a href='/User/show/{$user->id}'>Home</a></li>";
+        
         $html .=   "<li><a href='/Producto'>Productos</a></li>";
         
+        if(Login::role('ROLE_ADMIN'))
         $html .=   "<li><a href='/User'>Usuarios</a></li>";
         
-        
+        if(Login::role('ROLE_ADMIN'))
         $html .=   "<li><a href='/Panel/admin'>Panel del administrador</a></li>";
             
         $html .= "<li><a href='/Contacto'>Contacto</a></li>";
@@ -191,15 +197,15 @@ class Base implements TemplateInterface{
            
         // Enlace a los tests de ejemplo (solamente para usuarios con alguno de los TEST_ROLES)
         // Lo eliminaremos en producción, junto a la carpeta test y el TestController
-        //if(Login::role('ROLE_ADMIN'))
+        if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Test'>Test</a></li>";
         
         // Enlace a las estadística de visitas (solamente para usuarios con alguno de los STAT_ROLES)
-            //if(Login::role('ROLE_ADMIN'))
+            if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Stat'>Visitas</a></li>";
         
         // Enlace a la gestión de errores (solamente para usuarios con alguno de los ERROR_ROLES)
-            //if(Login::role('ROLE_ADMIN'))
+            if(Login::role('ROLE_ADMIN'))
             $html .=   "<li><a href='/Error/list'>Errores</a></li>";
          
         // Enlace al repositorio de FastLight en GitHub  

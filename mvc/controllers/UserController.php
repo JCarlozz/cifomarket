@@ -10,7 +10,7 @@
         
         public function list(int $page = 1){
                         
-            Auth::admin();
+            Login::isAdmin();
             
             //analiza si hay filtro
             $filtro = Filter::apply('User');
@@ -66,14 +66,14 @@
         
        public function edit(int $id=0){
             
-            //Auth::admin();
+            Login::oneRole(["ROLE_USER", "ROLE-ADMIN"]);
             
             //busca del usuario con ese ID
             $user = User::findOrFail($id, "No se encontró el usuario.");
                         
             //retorna una ViewResponse con la vista con la vista con el formulario de edición
             return view('user/edit',[
-                'user'      => $user
+                'user'  => $user
             ]);
         }
         
@@ -88,7 +88,7 @@
         
         public function create(){
             
-            //Auth::admin();
+            Login::isAdmin();
             
             return view('user/create');
         }
@@ -112,7 +112,13 @@
             $user->email              = request()->post('email');
             $user->phone              = request()->post('phone');
                             
-            $user->addRole('ROLE_USER', $this->request->post('roles'));
+            $roles=[];
+            
+            if(Login::isAdmin()){
+                $roles = $this->request->post('roles');
+            }
+            
+                $user->addRole('ROLE_USER', $roles );
             
             //$user->picture(request()->post('picture') ?? 'DEFAULT_USERS_IMAGE');
             
