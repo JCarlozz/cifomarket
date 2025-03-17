@@ -33,14 +33,16 @@
 			<form method="POST" class="flex-container gap2" enctype="multipart/form-data" action="/Producto/store">
 				
 				<div class="flex2">
+				
+					<input type="hidden" name="idusers" value=<?=user()->id?>>
 					<label>Título</label>
 					<input type="text" name="titulo" value="<?=old('titulo')?>">
 					<br>
 					<label>Precio</label>
-					<input type="text" name="Precio" value="<?=old('Precio')?>">
+					<input type="number" name="precio" value="<?=old('precio')?>">
 					<br>					
 					<label>Imagen</label>
-					<input type="file" name="Imagen" acept="image/*" id="file-with-preview">
+					<input type="file" name="foto" accept="image/*" id="file-with-preview">
 					<br>
 					<label>Estado</label>
 					<select name="estado">

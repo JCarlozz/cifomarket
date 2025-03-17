@@ -55,12 +55,16 @@ class ProductoController extends Controller{
     
     public function create(){
         
-        //Auth::role('ROLE_LIBRARIAN');
+        Auth::check();
         
-        return view('producto/create',[
-            'producto' => Producto::orderBy('id')
-        ]);
+                
+        return view('producto/create', [
+                     'producto' => new Producto()
+     
+                    ]);    
     }
+        
+     
     
     public function store(){
         
@@ -73,11 +77,12 @@ class ProductoController extends Controller{
             $producto = new Producto();       //crea el producto
             
             //toma los datos que llegan por POST
-            $producto->titulo            =request()->post('titulo');
-            $producto->descripcion          =request()->post('descripcion');
+            $producto->idusers      =request()->post('idusers');
+            $producto->titulo       =request()->post('titulo');
+            $producto->descripcion  =request()->post('descripcion');
             $producto->precio       =request()->post('precio');
-            $producto->foto           =request()->post('foto');
-            $producto->estado          =request()->post('estado');
+            $producto->foto         =request()->post('foto');
+            $producto->estado       =request()->post('estado');
             
             
             //intenta guardar el libro, en caso que la inserción falle vamos a
@@ -96,7 +101,7 @@ class ProductoController extends Controller{
                     
                     //recupera la portada como objeto UploadFile es null si no llega)
                     $file = request()->file(
-                        'portada',
+                        'foto',
                         8000000,
                         ['image/png', 'image/jpeg', 'image/gif', 'image/webp']
                         );
@@ -271,134 +276,8 @@ class ProductoController extends Controller{
                         
                         return redirect("/Producto/list");
                         
-                }
-    }
-    
-    /*public function addtema(){
-        
-        //Auth::role('ROLE_LIBRARIAN');
-        
-        if(empty(request()->post('add')))
-            throw new FormException("No se recibió el formulario");
-            
-            $idlibro = intval(request()->post('idlibro'));
-            $idtema  = intval(request()->post('idtema'));
-            
-            $libro   = Libro::findOrFail($idlibro, "No se encontró el libro");
-            
-            $tema    = Tema::findOrFail($idtema, "No se encontró el tema");
-            
-            try{
-                $libro->addTema($idtema);
-                
-                Session::success("Se ha añadido $tema->tema a $libro->titulo.");
-                return redirect("/Libro/edit/$idlibro");
-                
-            }catch(SQLException $e){
-                
-                Session::error("No se pudo añadir $tema->tema a $libro->titulo.");
-                
-                if(DEBUG)
-                    throw new SQLException($e->getMessage());
-                    
-                    return redirect("/Libro/edit/$idlibro");
             }
     }
     
-    public function removetema(){
         
-        Auth::role('ROLE_LIBRARIAN');
-        
-        if(empty(request()->post('remove')))
-            throw new FormException("No se recibió el formulario");
-            
-            $idlibro = intval(request()->post('idlibro'));
-            $idtema  = intval(request()->post('idtema'));
-            
-            $libro   = Libro::findOrFail($idlibro, "No se encontró el libro");
-            
-            $tema    = Tema::findOrFail($idtema, "No se encontró el tema");
-            
-            try{
-                $libro->removetema($idtema);
-                
-                Session::success("Se ha eliminado el $tema->tema de $libro->titulo.");
-                return redirect("/Libro/edit/$idlibro");
-                
-            }catch(SQLException $e){
-                
-                Session::error("No se pudo eliminar $tema->tema a $libro->titulo.");
-                
-                if(DEBUG)
-                    throw new SQLException($e->getMessage());
-                    
-                    return redirect("/Libro/edit/$idlibro");
-            }
-    }
-    
-    public function dropcover(){
-        
-        Auth::role('ROLE_LIBRARIAN');
-        
-        if (!request()->has('borrar'))
-            throw new FormException('Faltan datos para completar la operación');
-            
-            
-            $id = request()->post('id');
-            $libro = Libro::findOrFail($id, "No se ha encontrado el libro.");
-            
-            $tmp = $libro->portada;
-            $libro->portada = NULL;
-            
-            try{
-                $libro->update();
-                File::remove('../public/'.PRO_IMAGE_FOLDER.'/'.$tmp, true);
-                
-                Session::success("Borrado de la portada $libro-titulo realizada.");
-                return redirect("/Libro/edit/$id");
-                
-            }catch (SQLException $e){
-                Session::error("No se pudo eliminar la portada");
-                
-                if (DEBUG)
-                    throw new SQLException($e->getMessage());
-                    
-                    return redirect("/Libro/edit/$id");
-                    
-            }catch (FileException $e){
-                Session::warning("No se pudo eliminar el fichero del disco");
-                
-                if (DEBUG)
-                    throw new FileException($e->getMessage());
-                    
-                    return redirect("/Libro/edit/$libro->id");
-                    
-            }
-            
-    }
-    
-    public function checkisbn(string $isbn = ''):JsonResponse{
-        
-        //esta operación solamente la puedes hacer el administrador, si el usuario
-        //no tiene permiso para hacerla, retornaremos una JsonResponse de error
-        if(!Auth::oneRole(['ROLE_LIBRARIAN','ROLE_ADMIN'])){
-            return new JsonResponse(
-                ['status' => 'ERROR'],        //array con los datos
-                'Operación no autorizada',    //mensaje adicional
-                401,                          //código HTTP
-                'NOT AUTHORIZED'              //mensaje HTTP
-                );
-        }
-        
-        //recupera el libro con ese isbn
-        $libro = Libro::where([$isbn => 'isbn']);
-        
-        //retorna una nueva JsonResponse con el campo "found" a
-        //true o false dependiendo de si lo ha encontrado o no
-        return new JsonResponse([
-            'found' => $libro ? true : false,
-            'isbn'  => $libro->isbn
-        ]);
-    }*/
-    
 }

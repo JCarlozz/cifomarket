@@ -26,13 +26,12 @@
 		<?= $template->messages() ?>
 		
 		<main>
+		
             <div>
                 <h1><?= APP_NAME ?></h1>
-                <h2>Lista completa de productos</h2>
-        
-                
+                <h2>Lista completa de productos</h2>                	 
             </div>
-        
+        	<div>
             <?php if ($productos) { ?>
                 <div class="right">
                     <?= $paginator->stats() ?>
@@ -59,10 +58,10 @@
                         'Titulo'
                     );
                 }?>
+                </div>
                 
-        
                 <!-- Tabla con los resultados -->
-                <section>                    
+                                    
                     <section>                    
                     <?php foreach ($productos as $producto) { ?>
 						<div class="centrado three-columns">
@@ -84,7 +83,7 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 <?php } ?>-->
-                            </td>
+                            
                         </div>
                     <?php } ?>
                 </section>
