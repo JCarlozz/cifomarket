@@ -34,7 +34,7 @@
     		</div>
     		
     		<?php 
-    		if ($filtro){
+    		if($filtro){
     		    echo $template->removeFilterForm($filtro, '/User/list');
     		    
     		}else{

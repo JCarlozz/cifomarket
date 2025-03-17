@@ -13,14 +13,14 @@
             Login::isAdmin();
             
             //analiza si hay filtro
-            $filtro = Filter::apply('User');
+            $filtro = Filter::apply('users');
             
             //recupera el número de resultados por página
             $limit = RESULTS_PER_PAGE;
             
             //si hay filtro
             if($filtro){
-                //recupera   de libros que cumplen los criterios del filtro
+                //recupera de ususarios que cumplen los criterios del filtro
                 $total = User::filteredResults($filtro);
                 
                 //crea el objeto paginador

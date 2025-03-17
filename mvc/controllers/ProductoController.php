@@ -7,20 +7,21 @@ class ProductoController extends Controller{
     
     public function list(int $page = 1){
         //analiza si hay filtro
-        $filtro = Filter::apply('Producto');
+        $filtro = Filter::apply('productos');
         
         //recupera el número de resultados por página
         $limit = RESULTS_PER_PAGE;
         
         //si hay filtro
         if($filtro){
-            //recupera   de libros que cumplen los criterios del filtro
+            //recupera los productos que cumplen los criterios del filtro
             $total = Producto::filteredResults($filtro);
             
             //crea el objeto paginador
             $paginator = new Paginator('/Producto/list', $page, $limit, $total);
             
-            
+            //recupera los productos que cumplen con los criterios
+             $productos = Producto::filter($filtro, $limit, $paginator->getOffset());
             
             //si no hay filtro
         }else{
