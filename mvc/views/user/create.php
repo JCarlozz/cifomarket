@@ -100,7 +100,7 @@
     					<input type="password" name="repeatpassword" value="<?= old('repeatpassword')?>">
     					<br>
     					<label>Imagen de perfil</label>
-    					<input type="file" name="picture" accept="image/*" id="file-with-preview">
+    					<input type="file" name="foto" accept="image/*" id="file-with-preview">
     					<br>
     					<?php if(Login::isAdmin()){?>
     					<label>Rol</label>

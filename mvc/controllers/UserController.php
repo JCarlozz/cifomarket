@@ -108,19 +108,22 @@
             if ($user->password != $repeat)
                 throw new ValidationException("Las claves no coinciden.");
             
-            $user->nombreyapellidos   = request()->post('nombreyapellidos');
-            $user->email              = request()->post('email');
-            $user->phone              = request()->post('phone');
+            $user->nombreyapellidos       = request()->post('nombreyapellidos');
+            $user->email                  = request()->post('email');
+            $user->phone                  = request()->post('phone');
+            $user->poblacion              = request()->post('poblacion');
+            $user->provincia              = request()->post('provincia');
+            $user->direccion              = request()->post('direccion');
                             
             $roles=[];
             
             if(Login::isAdmin()){
                 $roles = $this->request->post('roles');
-            }
-            
                 $user->addRole('ROLE_USER', $roles );
+            }else
+                $user->addRole('ROLE_USER');
             
-            $user->foto(request()->post('foto') ?? 'DEFAULT_USERS_IMAGE');
+            
             
             try{
                 $user->save();
@@ -132,7 +135,7 @@
                  );
                 
                 if ($file) {
-                    $user->foto = $file->store('../public/' .USER_IMAGES_FOLDER, 'user_');
+                    $user->foto = $file->store('../public/' .USER_IMAGE_FOLDER, 'user_');
                     $user->update();
                 }
                 
@@ -250,7 +253,7 @@
                           
                           
                           Session::success("Se ha borrado de el usuario $user->nombreyapellidos.");
-                          return view("/User/list");
+                          return redirect("/Logout");
                           
                   }catch (SQLException $e){
                       

@@ -178,6 +178,7 @@ class Base implements TemplateInterface{
         
         $html .=   "<li><a href='/'>Inicio</a></li>";
         
+        
         if(Login::check())
         $html .=   "<li><a href='/User/show/{$user->id}'>Home</a></li>";
         
